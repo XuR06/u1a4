@@ -195,25 +195,38 @@ public class twoDimensionalArray extends javax.swing.JFrame {
         
         String str = "";
         
+        if (numOfStudents == 30){
+            output.setText("The array is full");
+            return;
+     
+        }
         
            
-           grades[numOfStudents][0] = "Student #"+numOfStudents+1+" "+ firstName.getText();
+           grades[numOfStudents][0] = firstName.getText();
            grades[numOfStudents][1] = lastName.getText();
-           grades[numOfStudents][2] = "Grade 1: "+testOne.getText();
-           grades[numOfStudents][3] = "Grade 2: "+testTwo.getText();
-           grades[numOfStudents][4] = "Grade 3: "+testThree.getText();
-           grades[numOfStudents][5] = "Grade 4: "+testFour.getText();
+           grades[numOfStudents][2] = testOne.getText();
+           grades[numOfStudents][3] = testTwo.getText();
+           grades[numOfStudents][4] = testThree.getText();
+           grades[numOfStudents][5] = testFour.getText();
+            
+           for (int l = 0; l < numOfStudents; l++){
+               str += grades[numOfStudents][0];
+               str += " ";
+               str += grades[numOfStudents][1];
+               str += " ";
+               str += grades[numOfStudents][2];
+               str += " ";
+               str += grades[numOfStudents][3];
+               str += " ";
+               str += grades[numOfStudents][4];
+               str += " ";
+               str += grades[numOfStudents][5];
+               str += "\n";
+               arrayOutput.setText(str);
+           }
+           
            
            numOfStudents++;
-           
-           for (int l = 0; l < 6; l++){
-               str += grades[numOfStudents][l];
-               arrayOutput.setText(str);
-               
-        
-                
-           }
-        
     }//GEN-LAST:event_addActionPerformed
 
     /**
