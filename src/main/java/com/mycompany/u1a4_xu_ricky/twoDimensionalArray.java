@@ -84,6 +84,11 @@ public class twoDimensionalArray extends javax.swing.JFrame {
         });
 
         calcAvg.setText("Student Average");
+        calcAvg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calcAvgActionPerformed(evt);
+            }
+        });
 
         courseAvg.setText("Course Average");
 
@@ -194,40 +199,77 @@ public class twoDimensionalArray extends javax.swing.JFrame {
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         
         String str = "";
+        double testMarkAsDouble = 0;
         
         if (numOfStudents == 30){
             output.setText("The array is full");
             return;
-     
         }
         
-           
-           grades[numOfStudents][0] = firstName.getText();
-           grades[numOfStudents][1] = lastName.getText();
-           grades[numOfStudents][2] = testOne.getText();
-           grades[numOfStudents][3] = testTwo.getText();
-           grades[numOfStudents][4] = testThree.getText();
-           grades[numOfStudents][5] = testFour.getText();
-            
-           for (int l = 0; l < numOfStudents; l++){
-               str += grades[numOfStudents][0];
-               str += " ";
-               str += grades[numOfStudents][1];
-               str += " ";
-               str += grades[numOfStudents][2];
-               str += " ";
-               str += grades[numOfStudents][3];
-               str += " ";
-               str += grades[numOfStudents][4];
-               str += " ";
-               str += grades[numOfStudents][5];
-               str += "\n";
-               arrayOutput.setText(str);
-           }
-           
-           
-           numOfStudents++;
+        grades[numOfStudents][0] = firstName.getText();
+        grades[numOfStudents][1] = lastName.getText();
+        grades[numOfStudents][2] = testOne.getText();
+        grades[numOfStudents][3] = testTwo.getText();
+        grades[numOfStudents][4] = testThree.getText();
+        grades[numOfStudents][5] = testFour.getText();
+
+        for (int i = 2; i <= 5; i++) {
+            testMarkAsDouble = Double.parseDouble(grades[numOfStudents][i]);
+            if (testMarkAsDouble > 100 || testMarkAsDouble < 0) {
+                output.setText("Invalid Input for Test Marks (Must be from 0-100");
+                return;
+            }
+        }
+        
+        if (numOfStudents > 0) {
+            for (int i = 1; i <= numOfStudents; i++) {
+                if (grades[numOfStudents][0].equals(grades[i-1][0]) && grades[numOfStudents][1].equals(grades[i-1][1])) {
+                    output.setText("There is already a student with the same first and last name");
+                    return;
+                }
+            }
+        }
+
+        for (int l = 0; l <= numOfStudents; l++) {
+            str += grades[l][0];
+            str += " ";
+            str += grades[l][1];
+            str += " ";
+            str += grades[l][2];
+            str += " ";
+            str += grades[l][3];
+            str += " ";
+            str += grades[l][4];
+            str += " ";
+            str += grades[l][5];
+            str += "\n";
+            arrayOutput.setText(str);
+
+        }
+
+        numOfStudents++;
     }//GEN-LAST:event_addActionPerformed
+
+    private void calcAvgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcAvgActionPerformed
+        // TODO add your handling code here:
+        
+        String firstNameAvg = firstName.getText();
+        String lastNameAvg = lastName.getText();
+        double avg = 0;
+        
+        
+        for (int i = 0; i <= numOfStudents; i++){
+            if (grades[i][0].equals(firstNameAvg) && grades[i][1].equals(lastNameAvg)){
+                for (int l = 2; l <= 5; l++){
+                avg += Double.parseDouble(grades[i][l]);
+                } 
+             avg /= 4;
+             output.setText(""+firstNameAvg+" "+lastNameAvg+"'s Average is "+avg);
+             break;
+            } else
+                output.setText("The Students Test Grades Were Not Inputted");
+        }
+    }//GEN-LAST:event_calcAvgActionPerformed
 
     /**
      * @param args the command line arguments
