@@ -213,12 +213,16 @@ public class twoDimensionalArray extends javax.swing.JFrame {
         grades[numOfStudents][4] = testThree.getText();
         grades[numOfStudents][5] = testFour.getText();
 
+        try {
         for (int i = 2; i <= 5; i++) {
             testMarkAsDouble = Double.parseDouble(grades[numOfStudents][i]);
             if (testMarkAsDouble > 100 || testMarkAsDouble < 0) {
-                output.setText("Invalid Input for Test Marks (Must be from 0-100");
+                output.setText("Invalid Input for Test Marks (Must be from 0-100)");
                 return;
             }
+        }
+        } catch (Exception e) {
+            output.setText("Please Enter Numbers As Test Marks");
         }
         
         if (numOfStudents > 0) {
