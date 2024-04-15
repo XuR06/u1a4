@@ -91,6 +91,11 @@ public class twoDimensionalArray extends javax.swing.JFrame {
         });
 
         courseAvg.setText("Course Average");
+        courseAvg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                courseAvgActionPerformed(evt);
+            }
+        });
 
         output.setEditable(false);
         output.setColumns(20);
@@ -200,18 +205,19 @@ public class twoDimensionalArray extends javax.swing.JFrame {
         
         String str = "";
         double testMarkAsDouble = 0;
+        output.setText("");
         
         if (numOfStudents == 30){
             output.setText("The array is full");
             return;
         }
         
-        grades[numOfStudents][0] = firstName.getText();
-        grades[numOfStudents][1] = lastName.getText();
-        grades[numOfStudents][2] = testOne.getText();
-        grades[numOfStudents][3] = testTwo.getText();
-        grades[numOfStudents][4] = testThree.getText();
-        grades[numOfStudents][5] = testFour.getText();
+        grades[numOfStudents][0] = firstName.getText().trim();
+        grades[numOfStudents][1] = lastName.getText().trim();
+        grades[numOfStudents][2] = testOne.getText().trim();
+        grades[numOfStudents][3] = testTwo.getText().trim();
+        grades[numOfStudents][4] = testThree.getText().trim();
+        grades[numOfStudents][5] = testFour.getText().trim();
 
         try {
         for (int i = 2; i <= 5; i++) {
@@ -223,6 +229,7 @@ public class twoDimensionalArray extends javax.swing.JFrame {
         }
         } catch (Exception e) {
             output.setText("Please Enter Numbers As Test Marks");
+            return;
         }
         
         if (numOfStudents > 0) {
@@ -257,8 +264,8 @@ public class twoDimensionalArray extends javax.swing.JFrame {
     private void calcAvgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcAvgActionPerformed
         // TODO add your handling code here:
         
-        String firstNameAvg = firstName.getText();
-        String lastNameAvg = lastName.getText();
+        String firstNameAvg = firstName.getText().trim();
+        String lastNameAvg = lastName.getText().trim();
         double avg = 0;
         
         
@@ -274,6 +281,31 @@ public class twoDimensionalArray extends javax.swing.JFrame {
                 output.setText("The Students Test Grades Were Not Inputted");
         }
     }//GEN-LAST:event_calcAvgActionPerformed
+
+    private void courseAvgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courseAvgActionPerformed
+        // TODO add your handling code here:
+        double courseAvg = 0;
+        int count = 0;
+        
+        
+        try {
+            
+                for (int i = 0; i < numOfStudents; i++) {
+                    for (int l = 2; l <= 5; l++) {
+                        courseAvg += Double.parseDouble(grades[i][l]);
+                        count++;
+                    }
+                }
+                courseAvg = courseAvg / count;
+                output.setText("The Course Average is " + courseAvg + "%");
+            
+        } catch (Exception e) {
+            output.setText("There are no inputs in the array");
+            
+        }
+        
+        
+    }//GEN-LAST:event_courseAvgActionPerformed
 
     /**
      * @param args the command line arguments
